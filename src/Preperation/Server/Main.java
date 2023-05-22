@@ -1,6 +1,6 @@
-package Preperation;
+package Preperation.Server;
 
-public class ServerMain {
+public class Main {
     public static void main(String[] args) {
         EchoServer echoServer= new EchoServer();
         echoServer.establish();

@@ -1,6 +1,6 @@
-package Preperation;
+package Preperation.Client;
 
-public class ClientMain {
+public class Main {
     public static void main(String[] args) {
         EchoClient echoClient = new EchoClient();
         echoClient.establish();
