@@ -1,6 +1,7 @@
 package Preperation.Client;
 
 import Data.Data;
+import Preperation.Shared.PersistentTime;
 
 import java.io.*;
 import java.net.*;
@@ -23,8 +24,9 @@ public class EchoClient {
      */
     public void establish() {
         Socket echoSocket = null;
-        PrintWriter out = null;
-        BufferedReader in = null;
+        ObjectOutputStream out = null;  // changed to OOS
+        ObjectInputStream in = null; // changed to OIS
+        String filename = "time.ser";
 
         try {
             // Print the local host address
@@ -33,16 +35,14 @@ public class EchoClient {
             System.out.printf("Attempting to create new echo socket for a connection to %s on port %d%n", data.serverIPAddress(), PORT);
 
             // Create a socket and connect to the server
-            echoSocket = new Socket(data.serverIPAddress(), PORT);
-
+            echoSocket = new Socket(InetAddress.getLocalHost(), PORT);  // run on localhost ip at specified port
             System.out.println("socket built successfully!");
-
             // Get the output stream of the socket
-            out = new PrintWriter(echoSocket.getOutputStream(), true);
+            out = new ObjectOutputStream(echoSocket.getOutputStream()); // output as object stream
+            System.out.println("OOS constructed.");
 
             // Get the input stream of the socket
-            in = new BufferedReader(new InputStreamReader(
-                    echoSocket.getInputStream()));
+            in = new ObjectInputStream(new FileInputStream(filename));
         } catch (UnknownHostException e) {
             System.err.println("Don't know about host.");
             System.exit(1);
@@ -51,19 +51,18 @@ public class EchoClient {
             e.printStackTrace();
             System.exit(1);
         }
-
         BufferedReader stdIn = new BufferedReader(new InputStreamReader(System.in));
         String userInput;
 
         try {
             // Read user input and send it to the server
             while ((userInput = stdIn.readLine()) != null) {
-                out.println(userInput);
-
+                // write a new PersistentTime object with curr time
+                out.writeObject(new PersistentTime());
+                System.out.println("\u2713 Object sent");
                 // If the user enters "Bye.", break the loop
                 if (userInput.equals("Bye."))
                     break;
-
                 // Receive and print the server's response
                 System.out.println("echo: " + in.readLine());
             }
