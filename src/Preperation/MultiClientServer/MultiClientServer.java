@@ -35,6 +35,7 @@ class MultiClientServer extends Thread {
         }
 
         Socket clientSocket;
+        System.out.println(serverSocket.getInetAddress().getHostAddress() + ":" + serverSocket.getLocalPort());
         System.out.printf("Host Address: %s%s %n", iAddr, iAddr.toString().equals("0.0.0.0/0.0.0.0") ? " (wildcard) -- Listening on all interfaces " : "");
         System.out.println("Halting operations and waiting for a client to connect...");
 

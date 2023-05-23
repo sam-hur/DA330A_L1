@@ -31,8 +31,8 @@ public class EchoClient {
         try {
             // Print the local host address
             System.out.println(InetAddress.getLocalHost());
-
-            System.out.printf("Attempting to create new echo socket for a connection to %s on port %d%n", data.serverIPAddress(), PORT);
+            InetAddress iAddr = InetAddress.getLocalHost();
+            System.out.printf("Attempting to create new echo socket for a connection to %s on port %d%n", iAddr, PORT);
 
             // Create a socket and connect to the server
             echoSocket = new Socket(InetAddress.getLocalHost(), PORT);  // run on localhost ip at specified port

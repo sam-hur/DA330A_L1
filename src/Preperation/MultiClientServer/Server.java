@@ -8,7 +8,7 @@ import java.net.*;
  * It receives messages from the client and echoes them back.
  */
 public class Server extends Thread {
-    Socket clientSocket = null;
+    Socket clientSocket;
 
     /**
      * Constructs a new Server thread with the specified client socket.
