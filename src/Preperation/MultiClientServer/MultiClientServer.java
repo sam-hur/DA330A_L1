@@ -27,7 +27,7 @@ class MultiClientServer extends Thread {
 
         try {
             // Create a server socket and bind it to the specified port
-            serverSocket = new ServerSocket(PORT);
+            serverSocket = new ServerSocket(PORT, 20, InetAddress.getLocalHost());
             iAddr =  serverSocket.getInetAddress();
         } catch (IOException e) {
             System.out.printf("Could not listen on port: %s%n", PORT);

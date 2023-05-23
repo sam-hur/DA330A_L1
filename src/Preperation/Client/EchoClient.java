@@ -30,8 +30,8 @@ public class EchoClient {
 
         try {
             // Print the local host address
-            System.out.println(InetAddress.getLocalHost());
-            InetAddress iAddr = InetAddress.getByAddress(new byte[]{0, 0, 0, 0});
+            System.out.println(InetAddress.getByName("192.168.56.1"));
+            InetAddress iAddr = InetAddress.getByName("192.168.56.1");
             System.out.printf("Attempting to create new echo socket for a connection to %s on port %d%n", iAddr, PORT);
 
             // Create a socket and connect to the server
