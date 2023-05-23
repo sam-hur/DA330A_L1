@@ -71,7 +71,8 @@ public class ClientHandler extends Thread {
     }
 
     public void sendMessage(String message) throws IOException {
-        out.write("("+new PersistentTime().getTime().toString()+") " + message);
+        String time = new PersistentTime().getTime().toString().split("\s")[3];
+        out.write("("+time+") " + message);
         out.newLine();
         out.flush();
     }
