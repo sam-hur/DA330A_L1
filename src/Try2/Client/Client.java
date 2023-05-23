@@ -50,7 +50,7 @@ public class Client {
 
     public void listen(){
         new Thread(() -> {
-            System.out.println("Listening for new messages");
+            System.out.println("You have joined the server chat!");
             while(socket.isConnected()){
                 try {
                     String inputLine = in.readLine();

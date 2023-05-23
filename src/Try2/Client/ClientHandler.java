@@ -45,7 +45,7 @@ public class ClientHandler extends Thread {
             disconnect();
             System.out.printf("\u2713 connection to %s (Port %s) terminated successfully%n", clientSocket.getInetAddress().getHostAddress(), clientSocket.getPort());
         } catch (IOException ioe) {
-            System.out.printf("Connection to %s interrupted.%n", clientSocket.getInetAddress().getHostAddress());
+            System.out.printf("Connection to %s (port %s) interrupted.%n", clientSocket.getInetAddress().getHostAddress(), clientSocket.getPort());
             disconnect();
         } finally {
             try {
@@ -71,7 +71,7 @@ public class ClientHandler extends Thread {
     }
 
     public void sendMessage(String message) throws IOException {
-        out.write("("+new PersistentTime()+")" + message);
+        out.write("("+new PersistentTime().getTime()+") " + message);
         out.newLine();
         out.flush();
     }
