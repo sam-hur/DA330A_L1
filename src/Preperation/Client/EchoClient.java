@@ -35,7 +35,7 @@ public class EchoClient {
             System.out.printf("Attempting to create new echo socket for a connection to %s on port %d%n", iAddr, PORT);
 
             // Create a socket and connect to the server
-            echoSocket = new Socket(InetAddress.getLocalHost(), PORT);  // run on localhost ip at specified port
+            echoSocket = new Socket(iAddr, PORT);  // run on localhost ip at specified port
             System.out.println("socket built successfully!");
             // Get the output stream of the socket
             out = new ObjectOutputStream(echoSocket.getOutputStream()); // output as object stream

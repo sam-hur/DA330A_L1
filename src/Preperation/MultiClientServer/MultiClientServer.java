@@ -22,7 +22,7 @@ class MultiClientServer extends Thread {
     public void run() {
         Data data = new Data();
         ServerSocket serverSocket = null;
-        int PORT = data.getEchoPort();
+        int PORT = data.getPort();
         InetAddress iAddr = null;
 
         try {
@@ -37,17 +37,12 @@ class MultiClientServer extends Thread {
         Socket clientSocket;
         System.out.println(serverSocket.getInetAddress().getHostAddress() + ":" + serverSocket.getLocalPort());
         System.out.printf("Host Address: %s%s %n", iAddr, iAddr.toString().equals("0.0.0.0/0.0.0.0") ? " (wildcard) -- Listening on all interfaces " : "");
-        System.out.println("Halting operations and waiting for a client to connect...");
+        System.out.printf("Halting operations and waiting for a client to connect (port %s)...%n", serverSocket.getLocalPort());
 
         while (!serverSocket.isClosed()) {
             try {
                 // Wait for a client to connect and accept the connection
                 clientSocket = serverSocket.accept();
-                /*
-                In the provided code, the server is creating a new socket for each incoming connection using the serverSocket.accept() method.
-                Each time a new client connects, a new socket is created to handle the communication with that client.
-                The client's socket port number is assigned by the operating system and can vary for each connection.
-                 */
                 System.out.printf("A new client has established a connection! (%s on port %s!)%n", clientSocket.getInetAddress(), clientSocket.getPort());
 
                 // Create a new Server Thread object to handle communication with the client
@@ -67,4 +62,8 @@ class MultiClientServer extends Thread {
             }
         }
     }
+
+
+
 }
+
