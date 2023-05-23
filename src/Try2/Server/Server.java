@@ -48,7 +48,7 @@ public class Server extends Thread{
     private ServerSocket createServerSocket(){
         ServerSocket ss = null;
         try {
-            ss = new ServerSocket(PORT, 20, InetAddress.getLocalHost());
+            ss = data.limitToLocalNetwork ? new ServerSocket(PORT) : new ServerSocket(PORT, 20, InetAddress.getByName(data.serverIP()));
         } catch (IOException ioe){
             System.err.printf("Could not listen on port: %s%n", PORT);
             ioe.printStackTrace();
