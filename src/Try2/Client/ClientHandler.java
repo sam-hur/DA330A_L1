@@ -1,6 +1,7 @@
 package Try2.Client;
 
 import Data.EndOfWrite;
+import Try2.Shared.PersistentTime;
 
 import java.io.*;
 import java.net.Socket;
@@ -70,7 +71,7 @@ public class ClientHandler extends Thread {
     }
 
     public void sendMessage(String message) throws IOException {
-        out.write(message);
+        out.write("("+new PersistentTime()+")" + message);
         out.newLine();
         out.flush();
     }

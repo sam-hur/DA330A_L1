@@ -49,31 +49,28 @@ public class Client {
 
 
     public void listen(){
-        new Thread(new Runnable() {
-            @Override
-            public void run() {
-                System.out.println("Listening for new messages");
-                while(socket.isConnected()){
+        new Thread(() -> {
+            System.out.println("Listening for new messages");
+            while(socket.isConnected()){
+                try {
+                    String inputLine = in.readLine();
+                    if (inputLine == null){
+                        throw new EndOfWrite();
+                    }
+                    System.out.println(inputLine);
+                }
+                catch (EndOfWrite eow){
+                    System.out.println("\u2713 Connection to server successfully terminated");
                     try {
-                        String inputLine = in.readLine();
-                        if (inputLine == null){
-                            throw new EndOfWrite();
-                        }
-                        System.out.println(inputLine);
+                        socket.close();
+                    } catch (IOException e) {
+                        throw new RuntimeException(e);
                     }
-                    catch (EndOfWrite eow){
-                        System.out.println("\u2713 Connection to server successfully terminated");
-                        try {
-                            socket.close();
-                        } catch (IOException e) {
-                            throw new RuntimeException(e);
-                        }
-                        break;
-                    }
-                    catch (IOException e) {
-                        System.err.println("Error in listening to the server (connection may have reset)");
-                        System.exit(-1);
-                    }
+                    break;
+                }
+                catch (IOException e) {
+                    System.err.println("Error in listening to the server (connection may have reset)");
+                    System.exit(-1);
                 }
             }
         }).start();

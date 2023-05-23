@@ -21,7 +21,7 @@ public class Data {
         try{
              if (limitToLocalNetwork){
 //                return InetAddress.getLocalHost().getHostAddress();
-                return "192.168.1.232";
+                return "192.168.1.99";
             }
             URL url = URI.create("https://api.ipify.org").toURL();
             BufferedReader reader = new BufferedReader(new InputStreamReader(url.openStream()));
