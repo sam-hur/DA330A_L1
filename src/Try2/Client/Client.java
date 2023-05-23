@@ -18,6 +18,8 @@ public class Client {
             in = new BufferedReader(new InputStreamReader(socket.getInputStream()));
         } catch (IOException ioe){
             System.err.println("\nUnable to connect; is the server running?");
+            System.err.print("\nInfo:\t");
+            System.out.print("IP: "+ data.serverIP() + "    |    Port: " + data.getPort());
             System.exit(-1);
         }
     }

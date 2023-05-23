@@ -44,7 +44,7 @@ public class ClientHandler extends Thread {
             disconnect();
             System.out.printf("\u2713 connection to %s (Port %s) terminated successfully%n", clientSocket.getInetAddress().getHostAddress(), clientSocket.getPort());
         } catch (IOException ioe) {
-            System.out.printf("Connection to %s interrupted. Reconnecting...%n", clientSocket.getInetAddress().getHostAddress());
+            System.out.printf("Connection to %s interrupted.%n", clientSocket.getInetAddress().getHostAddress());
             disconnect();
         } finally {
             try {
