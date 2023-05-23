@@ -8,7 +8,7 @@ import java.io.InputStreamReader;
 import java.net.*;
 import java.util.ArrayList;
 
-public class Data implements Runnable{
+public class Data {
     public Data(){}
 
     public Boolean limitToLocalNetwork = true;
@@ -20,7 +20,8 @@ public class Data implements Runnable{
         String IP = null;
         try{
              if (limitToLocalNetwork){
-                return InetAddress.getLocalHost().getHostAddress();
+//                return InetAddress.getLocalHost().getHostAddress();
+                return "192.168.56.1";
             }
             URL url = URI.create("https://api.ipify.org").toURL();
             BufferedReader reader = new BufferedReader(new InputStreamReader(url.openStream()));
@@ -33,11 +34,5 @@ public class Data implements Runnable{
             throw new RuntimeException(e);
         }
         return IP;
-    }
-
-    private static ArrayList<EchoClient> clients = new ArrayList<>();
-    @Override
-    public void run(){
-
     }
 }
