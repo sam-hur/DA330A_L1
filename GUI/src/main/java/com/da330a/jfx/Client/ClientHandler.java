@@ -39,6 +39,7 @@ public class ClientHandler extends Thread {
                     1. construct your JFX "object"
                     2. Write it to a .ser serialized file using the ObjectOutputStream (I think).
                     3. save new writing to fileContent if it is different
+                    4. if it is different, close the JFX thread and launch a new JavaFX window with the properties found in the file
                  */
                 broadcast(clientSocket.getInetAddress().getHostAddress()+" ("+clientSocket.getPort()+ "):\t" + inputLine);
 
@@ -74,6 +75,7 @@ public class ClientHandler extends Thread {
                     // 2. If file content != fileObject, then replace it
                     // 3. If 2. is true, then also send an "File has been updated" message, or sent the deserialized, stringified content of the new file.
                     // e.g., handler.sendMessage(objContent.toString());
+                    // 4. if it is different, close the JFX thread and launch a new JavaFX window with the properties found in the file
                     handler.sendMessage(message);
                 } catch (IOException e) {
                     handler.disconnect();
