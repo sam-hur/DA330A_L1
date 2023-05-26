@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<?import javafx.scene.text.Font?>
+<AnchorPane xmlns="http://javafx.com/javafx"
+            xmlns:fx="http://javafx.com/fxml"
+            fx:controller="com.chatapp.gui.ChatApplication"
+            fx:id = "Stage"
+            prefHeight="400.0" prefWidth="600.0">
+    <children>
+        <Button fx:id = "sendMessage" layoutX="384" layoutY="368" prefWidth="60" text="Send"/>
+        <TextField fx:id = "tf_message" layoutX="30" layoutY="368" prefWidth="320"/>
+        <ScrollPane fx:id="sp_main" layoutX="30" layoutY="70">
+            <VBox fx:id="vbox_message" prefHeight="278" prefWidth="412"/>
+        </ScrollPane>
+        <Label layoutY="26" layoutX="184" text="ChatApp"><font>
+            <Font name="Arial Rounded Empty Bold" size="23"/></font>
+        </Label>
+        <Label layoutY="26" layoutX="645" text="Server"><font>
+            <Font name="Arial Rounded Empty Bold" size="23"/></font>
+        </Label>
+        <ScrollPane fx:id="server_scroll" layoutX="475" layoutY="70">
+            <VBox fx:id="server_vbox" prefHeight="110" prefWidth="412"/>
+        </ScrollPane>
+        <ScrollPane fx:id="client_scroll" layoutX="475" layoutY="270" AnchorPane.bottomAnchor="70" AnchorPane.rightAnchor="25">
+            <VBox fx:id="client_vbox" prefHeight="124" prefWidth="412"/>
+        </ScrollPane>
+        <Label layoutX="645" text="Connected clients" AnchorPane.bottomAnchor="200" AnchorPane.rightAnchor="125"><font>
+            <Font name="Arial Rounded Empty Bold" size="23"/></font>
+        </Label>
+    </children>
+</AnchorPane>
