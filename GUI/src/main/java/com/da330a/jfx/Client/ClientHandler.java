@@ -15,6 +15,8 @@ public class ClientHandler extends Thread {
     private BufferedReader in;
     private final Socket clientSocket;
 
+    private Object fileContents;
+
     public ClientHandler(Socket clientSocket) {
         this.clientSocket = clientSocket;
         try {
@@ -32,6 +34,12 @@ public class ClientHandler extends Thread {
         String inputLine;
         try {
             while ((inputLine = in.readLine()) != null) {
+                // WRITE TO FILE
+                /*
+                    1. construct your JFX "object"
+                    2. Write it to a .ser serialized file using the ObjectOutputStream (I think).
+                    3. save new writing to fileContent if it is different
+                 */
                 broadcast(clientSocket.getInetAddress().getHostAddress()+" ("+clientSocket.getPort()+ "):\t" + inputLine);
 
                 if (inputLine.equalsIgnoreCase("Bye")) {
@@ -62,6 +70,10 @@ public class ClientHandler extends Thread {
         for (ClientHandler handler : ClientHandler.connectedClients) {
             if (handler != this) { // Exclude the current client
                 try {
+                    // 1. READ FROM FILE
+                    // 2. If file content != fileObject, then replace it
+                    // 3. If 2. is true, then also send an "File has been updated" message, or sent the deserialized, stringified content of the new file.
+                    // e.g., handler.sendMessage(objContent.toString());
                     handler.sendMessage(message);
                 } catch (IOException e) {
                     handler.disconnect();
