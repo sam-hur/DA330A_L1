@@ -1,7 +1,10 @@
-package com.chatapp.Client;
+package com.da330a.jfx.Client;
 
-import com.chatapp.Data.Data;
-import com.chatapp.Data.EndOfWrite;
+
+import com.da330a.jfx.App;
+import com.da330a.jfx.Data.Data;
+import com.da330a.jfx.Data.EndOfWrite;
+import javafx.application.Application;
 
 import java.io.*;
 import java.net.Socket;
@@ -10,6 +13,14 @@ import java.util.Scanner;
 
 public class Client {
     public List<ClientHandler> connectedClients;
+    public static void main(String[] args) throws InterruptedException {
+        Thread appThread = new Thread(() -> Application.launch(App.class, args));
+        appThread.start();
+
+        Client client = new Client();
+        client.listen();  // listens on sep thread for incoming messages
+        client.sendMessage();  // sends newlines sent via the command prompt
+    }
 
     /**
      * Client constructor

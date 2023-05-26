@@ -1,4 +1,4 @@
-package com.chatapp.Data;
+package com.da330a.jfx.Data;
 
 public class EndOfWrite extends Exception {
     public EndOfWrite() {

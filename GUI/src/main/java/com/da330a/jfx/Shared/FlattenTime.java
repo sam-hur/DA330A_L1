@@ -1,4 +1,4 @@
-package com.chatapp.Shared;
+package com.da330a.jfx.Shared;
 
 import java.io.FileOutputStream;
 import java.io.IOException;

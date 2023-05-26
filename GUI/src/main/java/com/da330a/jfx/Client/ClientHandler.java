@@ -1,19 +1,15 @@
-package com.chatapp.Client;
+package com.da330a.jfx.Client;
 
-import com.chatapp.Data.EndOfWrite;
-import com.chatapp.Shared.PersistentTime;
-import javafx.application.Platform;
-import javafx.scene.Scene;
-import javafx.scene.layout.Pane;
-import javafx.scene.paint.Color;
-import javafx.scene.shape.Rectangle;
+
+import com.da330a.jfx.Data.EndOfWrite;
+import com.da330a.jfx.Shared.PersistentTime;
+
 import java.io.*;
 import java.net.Socket;
 import java.util.ArrayList;
 import java.util.List;
 
 public class ClientHandler extends Thread {
-
     public static List<ClientHandler> connectedClients = new ArrayList<>();
     private BufferedWriter out;
     private BufferedReader in;
@@ -61,6 +57,7 @@ public class ClientHandler extends Thread {
             }
         }
     }
+
     public void broadcast(String message) {
         for (ClientHandler handler : ClientHandler.connectedClients) {
             if (handler != this) { // Exclude the current client
@@ -75,44 +72,15 @@ public class ClientHandler extends Thread {
 
     public void sendMessage(String message) throws IOException {
         String time = new PersistentTime().getTime().toString().split("\s")[3];
-        out.write("("+time+") " + message);
-        out.newLine();
-
+        String msg = "("+time+") " + message;
         try {
-                ObjectOutputStream outputStream = new ObjectOutputStream(this.clientSocket.getOutputStream());
-                Rectangle rectangle = new Rectangle(100, 100, 200, 150);
-                rectangle.setFill(Color.BLUE);
-                Pane pane = new Pane();
-                pane.getChildren().add(rectangle);
-                Scene scene = new Scene(pane, 400, 300);
-                outputStream.writeObject(scene.getRoot());
-                outputStream.flush();
-                out.write("Graphic description sent!");
-                out.newLine();
-                out.flush();
-            } catch (IOException e) {
-                throw new RuntimeException(e);
-            }
+            out.write(msg);
+            out.newLine();
+            out.flush();
+        } catch (IOException e) {
+            throw new RuntimeException(e);
         }
-//            try {
-//
-//
-//
-//                // Write the serialized object to a file
-//                Serializable sceneGraphSerializable = new Serializable(){};
-//                try (FileOutputStream fileOutputStream = new FileOutputStream("sceneGraph.ser");
-//                    ObjectOutputStream outputStream2 = new ObjectOutputStream(fileOutputStream)) {
-//                        outputStream.writeObject(sceneGraphSerializable);
-//                        outputStream.flush();
-//                    }
-//                outputStream.writeObject(scene.getRoot());
-//                outputStream.flush();
-//                System.out.println("Graphic description sent!");
-//            } catch (IOException e) {
-//                e.printStackTrace();
-//            }
-//        });
-
+    }
 
     public void disconnect() {
         ClientHandler.connectedClients.remove(this);

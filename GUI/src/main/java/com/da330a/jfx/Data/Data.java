@@ -1,16 +1,25 @@
-package com.chatapp.Data;
+package com.da330a.jfx.Data;
 
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
-import java.net.*;
+import java.net.URI;
+import java.net.URL;
+import java.net.UnknownHostException;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
 
 public class Data {
     public Data(){}
 
+    public static List<String> getColors() {
+        return new ArrayList<>(Arrays.asList("Blue", "Red", "Green"));
+    }
+
     public Boolean limitToLocalNetwork = true;
 
-    public int getPort(){ return 11234; }
+    public int getPort(){ return 23232; }
     public int getEchoPort(){ return 2345; }
 
     public String serverIP() {

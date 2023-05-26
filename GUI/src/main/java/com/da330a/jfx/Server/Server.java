@@ -1,7 +1,9 @@
-package com.chatapp.Server;
+package com.da330a.jfx.Server;
 
-import com.chatapp.Client.ClientHandler;
-import com.chatapp.Data.Data;
+import com.da330a.jfx.Client.ClientHandler;
+import com.da330a.jfx.Data.Data;
+
+
 import java.io.*;
 import java.net.InetAddress;
 import java.net.ServerSocket;
@@ -11,7 +13,6 @@ import java.net.Socket;
  * This echo server prints its throughput back to the terminal.
  */
 public class Server extends Thread{
-
     public Server(){
         serverSocket = createServerSocket();
     }
@@ -40,8 +41,8 @@ public class Server extends Thread{
                 throw new RuntimeException(e);
             }
             System.out.printf("A new client has established a connection! (%s on port %s)%n", clientSocket.getInetAddress(), clientSocket.getPort());
-            ClientHandler ch = new ClientHandler(clientSocket);
-            ch.start();
+            ClientHandler crh = new ClientHandler(clientSocket);
+            crh.start();
             System.out.println("Total clients: " + ClientHandler.connectedClients.size());
         }
     }
@@ -66,6 +67,11 @@ public class Server extends Thread{
             ioe.printStackTrace();
         }
         return clientSocket;
+    }
+
+    public static void main(String[] args) {
+        Server server = new Server();
+        server.start();
     }
 }
 
